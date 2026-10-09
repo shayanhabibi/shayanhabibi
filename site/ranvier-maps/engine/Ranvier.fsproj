@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <IsPackable>false</IsPackable>
+    <DefineConstants>$(DefineConstants);RANVIER_TRACE</DefineConstants>
+    <Tailcalls>false</Tailcalls>
+  </PropertyGroup>
+  <ItemGroup><PackageReference Include="Fable.Core" Version="5.3.0" /></ItemGroup>
+  <ItemGroup>
+    <Compile Include="Types.fs" />
+    <Compile Include="PlatformDispatcher.fs" />
+    <Compile Include="Platform.fs" />
+    <Compile Include="Positional.fs" />
+    <Compile Include="TraceEvents.fs" />
+    <Compile Include="TraceSite.fs" />
+    <Compile Include="Trace.fs" />
+    <Compile Include="Core.fs" />
+    <Compile Include="Deltas.fs" />
+    <Compile Include="ValueReaders.fs" />
+    <Compile Include="Projections.fs" />
+    <Compile Include="Collections.fs" />
+    <Compile Include="Api.fs" />
+    <Compile Include="Combinators.fs" />
+    <Compile Include="TraceModel.fs" />
+    <Compile Include="TraceApi.fs" />
+  </ItemGroup>
+</Project>

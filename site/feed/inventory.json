@@ -1,0 +1,29 @@
+[
+  {
+    "file": "Partas.Nacara.Plugins.Solid.0.1.0-local.08bba7a.nupkg",
+    "id": "Partas.Nacara.Plugins.Solid",
+    "version": "0.1.0-local.08bba7a",
+    "repository": "https://github.com/shayanhabibi/Partas.Nacara.Plugins",
+    "commit": "08bba7a4f367ed3aac0b80ba38fdc8481f0b86b9",
+    "license": "MIT",
+    "sha256": "02c0c2232b3d17a3ad3e0d50d15be0953b054ae91e4d8d57687e3841887ced35"
+  },
+  {
+    "file": "Partas.Solid.3.0.0-local.e08ad85.nupkg",
+    "id": "Partas.Solid",
+    "version": "3.0.0-local.e08ad85",
+    "repository": "https://github.com/shayanhabibi/Partas.Solid",
+    "commit": "ada88c5018254e634942bbe6d19d1b5b3108267b",
+    "license": "MIT",
+    "sha256": "aa52fed9a18d6bca4cf5c6bc1aaa97962bfced3fd2ac64c032f8a7ef98d848c2"
+  },
+  {
+    "file": "Partas.Solid.FablePlugin.3.0.0-local.e08ad85.nupkg",
+    "id": "Partas.Solid.FablePlugin",
+    "version": "3.0.0-local.e08ad85",
+    "repository": null,
+    "commit": "ada88c5018254e634942bbe6d19d1b5b3108267b",
+    "license": "MIT",
+    "sha256": "3e16738effed1c967d78995ccdd694a17778c9c688acfb3cb6ad690b279cf897"
+  }
+]

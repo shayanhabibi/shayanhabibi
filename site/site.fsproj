@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup><OutputType>Exe</OutputType><IsPackable>false</IsPackable></PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Projects.fs" />
+    <Compile Include="DottedGraph.fs" />
+    <Compile Include="ProjectGraphs.fs" />
+    <Compile Include="Theme.fs" />
+    <Compile Include="Site.fs" />
+    <Content Include="content/*" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Oxpecker.ViewEngine" Version="3.0.0-beta-2" />
+    <ProjectReference Include="components/Profile.Components.fsproj" />
+    <PackageReference Include="Nacara.Core" Version="2.0.0-beta.6" />
+    <PackageReference Include="Nacara.Plugin.Markdown" Version="1.0.0-beta.2" />
+    <PackageReference Include="Nacara.Plugin.Literate" Version="1.0.0-beta.1" />
+    <PackageReference Include="Nacara.Plugin.Highlight.TextMate" Version="1.0.0-beta.1" />
+    <PackageReference Include="Partas.Nacara.Theme" Version="0.2.0" />
+    <PackageReference Include="Partas.Nacara.Plugins.Solid" Version="0.1.0-local.08bba7a" />
+  </ItemGroup>
+</Project>

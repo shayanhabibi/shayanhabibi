@@ -1,0 +1,15 @@
+**/bin/
+**/obj/
+**/node_modules/
+site/output/
+site/.nacara/
+test-results/
+playwright-report/
+.idea/
+*.user
+**/**/*.fs.jsx
+**/**/*.fs.js
+docs/dotted-graphs.md
+site/ranvier-maps/README.md
+site/static/graphs/*.svg
+.fake

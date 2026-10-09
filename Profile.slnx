@@ -1,0 +1,12 @@
+<Solution>
+  <Folder Name="/site/" />
+  <Folder Name="/site/ranvier-maps/">
+    <Project Path="site/ranvier-maps/Profile.RanvierMaps.fsproj" />
+    <Project Path="site/ranvier-maps/engine/Ranvier.fsproj" />
+  </Folder>
+  <Folder Name="/site/components/">
+    <Project Path="site/components/Profile.Components.fsproj" />
+  </Folder>
+  <Project Path="Build.fsproj" />
+  <Project Path="site/site.fsproj" />
+</Solution>

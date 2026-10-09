@@ -1,0 +1,254 @@
+/* Signal maps (docs/maps/SignalMap.fs). Layer nacara.maps, after nacara.landing.
+   A map card holds the example's code and the live map beneath it, in one frame. */
+
+.partas-solid-card--map {
+  margin: 1.75rem 0; display: grid; grid-template-columns: minmax(0, 1fr);
+  border: 1px solid var(--nacara-border); border-radius: var(--nacara-radius);
+  background: var(--rv-code-bg); box-shadow: var(--nacara-shadow-floating); overflow: hidden; }
+.partas-solid-card--map > .nacara-code,
+.partas-solid-card--map > nacara-tabs { margin: 0; border: 0; border-radius: 0; box-shadow: none; }
+.partas-solid-card--map > .partas-solid { border-top: 1px solid var(--nacara-border); }
+
+.nacara-code__line.rv-map-line--run {
+  background: color-mix(in oklab, var(--rv-contour) 14%, transparent);
+  box-shadow: inset 2px 0 var(--rv-contour);
+  transition: background .18s ease-out; }
+
+/* ---- Stage: the graph on a soft wash of contour and violet ---- */
+.rv-map { display: grid; grid-template-columns: minmax(0, 1fr); font-size: .8125rem; }
+.rv-map__stage {
+  position: relative;
+  padding: .75rem 1rem 2.25rem;
+  isolation: isolate;
+  background:
+    radial-gradient(60% 80% at 20% 30%, color-mix(in oklab, var(--rv-contour) 10%, transparent), transparent 70%),
+    radial-gradient(50% 70% at 85% 70%, color-mix(in oklab, var(--rv-violet) 9%, transparent), transparent 70%),
+    var(--rv-canvas); }
+.rv-map__svg { display: block; width: 100%; height: auto; max-height: 22rem; overflow: visible; }
+.rv-map__inspect {
+  position: absolute; left: 1rem; right: 1rem; bottom: .625rem;
+  color: var(--nacara-text-muted); font-family: var(--nacara-font-mono, monospace); font-size: .75rem;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+.rv-map-edge { fill: none; stroke: var(--rv-border-strong); stroke-width: 1.5; }
+.rv-map-dot { fill: var(--rv-contour); }
+.rv-map-dot--bright { fill: var(--rv-violet); filter: drop-shadow(0 0 4px var(--rv-violet)); }
+
+.rv-map-node { cursor: pointer; outline: none; }
+.rv-map-node__shape {
+  fill: var(--rv-raised); stroke: var(--rv-contour); stroke-width: 1.75;
+  transform-box: fill-box; transform-origin: center;
+  transition: fill .2s ease-out, stroke .2s ease-out, opacity .2s ease-out; }
+.rv-map-node--memo .rv-map-node__shape { stroke: var(--rv-violet); }
+.rv-map-node--async .rv-map-node__shape { stroke: var(--rv-pending); stroke-dasharray: 4 3; }
+.rv-map-node--effect .rv-map-node__shape { stroke: var(--rv-accent-text); }
+.rv-map-node__flight {
+  fill: none; stroke: var(--rv-pending); stroke-width: 1.5; stroke-dasharray: 3 5; opacity: 0;
+  transform-box: fill-box; transform-origin: center; }
+.rv-map-node__name { fill: var(--rv-text); font-size: 11px; font-weight: 500; }
+.rv-map-node__value {
+  fill: var(--rv-value); font-family: var(--nacara-font-mono, monospace); font-size: 10.5px;
+  transition: opacity .2s ease-out; }
+
+.rv-map-node:hover .rv-map-node__shape,
+.rv-map-node:focus-visible .rv-map-node__shape { stroke-width: 2.5; }
+.rv-map-node:focus-visible .rv-map-node__name { text-decoration: underline; }
+.rv-map-node.is-fresh .rv-map-node__shape { opacity: .55; }
+.rv-map-node.is-running .rv-map-node__shape {
+  fill: color-mix(in oklab, var(--rv-contour) 30%, var(--rv-raised));
+  filter: drop-shadow(0 0 6px color-mix(in oklab, var(--rv-contour) 70%, transparent)); }
+.rv-map-node.is-pending .rv-map-node__value,
+.rv-map-node.is-waiting .rv-map-node__value { opacity: .45; }
+.rv-map-node.is-waiting .rv-map-node__shape { stroke-dasharray: 2 3; }
+.rv-map-node.is-flight .rv-map-node__flight { opacity: 1; animation: rv-map-spin 2.4s linear infinite; }
+.rv-map-node.is-failed .rv-map-node__shape { stroke: var(--rv-error); fill: color-mix(in oklab, var(--rv-error) 14%, var(--rv-raised)); }
+.rv-map-node.is-failed .rv-map-node__value { fill: var(--rv-error); }
+.rv-map-node.is-flash .rv-map-node__shape { fill: color-mix(in oklab, var(--rv-contour) 45%, var(--rv-raised)); }
+.rv-map-node.is-dropped .rv-map-node__flight { animation: rv-map-drop .7s ease-out; }
+.rv-map-node.is-settled .rv-map-node__shape { animation: rv-map-glow .8s ease-out; }
+.rv-map-node.is-failing .rv-map-node__shape { animation: rv-map-shake .4s ease-in-out 2; }
+.rv-map-node__value.is-swap { animation: rv-map-swap .6s ease-out; }
+
+.rv-map-node.is-flight .rv-map-node__flight { animation-duration: calc(2.4s / var(--rv-map-speed, 1)); }
+.rv-map-node.is-dropped .rv-map-node__flight { animation-duration: calc(.7s / var(--rv-map-speed, 1)); }
+.rv-map-node.is-settled .rv-map-node__shape { animation-duration: calc(.8s / var(--rv-map-speed, 1)); }
+.rv-map-node.is-failing .rv-map-node__shape { animation-duration: calc(.4s / var(--rv-map-speed, 1)); }
+.rv-map-node__value.is-swap { animation-duration: calc(.6s / var(--rv-map-speed, 1)); }
+
+@keyframes rv-map-spin { to { transform: rotate(360deg); } }
+@keyframes rv-map-drop { from { opacity: 1; stroke: var(--rv-error); } to { opacity: 0; transform: scale(1.5); } }
+@keyframes rv-map-glow { 40% { filter: drop-shadow(0 0 8px var(--rv-contour)); } }
+@keyframes rv-map-shake { 25% { transform: translateX(-2px); } 75% { transform: translateX(2px); } }
+@keyframes rv-map-swap { from { fill: var(--rv-violet); } }
+
+/* ---- Controls, timeline, log ---- */
+.rv-map__bar {
+  display: flex; flex-wrap: wrap; align-items: center; gap: .5rem 1rem; padding: .625rem 1rem;
+  border-top: 1px solid var(--nacara-border); background: var(--rv-surface); }
+.rv-map__controls { display: flex; flex-wrap: wrap; gap: .5rem; }
+.rv-map__controls:empty { display: none; }
+.rv-map__button {
+  padding: .3rem .75rem; border: 1px solid var(--rv-border); border-radius: 999px;
+  background: var(--rv-raised); color: var(--rv-text); font: inherit; font-weight: 500; cursor: pointer;
+  transition: border-color .15s ease-out, background .15s ease-out; }
+.rv-map__button:hover { border-color: var(--rv-contour); }
+.rv-map__button:focus-visible { outline: 2px solid var(--rv-contour); outline-offset: 2px; }
+.rv-map__button:active { background: color-mix(in oklab, var(--rv-contour) 16%, var(--rv-raised)); }
+.rv-map__button--reset { color: var(--nacara-text-muted); }
+.rv-map__input {
+  display: inline-flex; align-items: center; gap: .4rem; padding: .2rem .6rem;
+  border: 1px solid var(--rv-border); border-radius: 999px; background: var(--rv-raised); color: var(--rv-text);
+  font-weight: 500; }
+.rv-map__input:focus-within { border-color: var(--rv-contour); }
+.rv-map__input-field { font: inherit; color: inherit; accent-color: var(--rv-contour); }
+.rv-map__input-field:focus-visible { outline: 2px solid var(--rv-contour); outline-offset: 2px; }
+.rv-map__input--number .rv-map__input-field,
+.rv-map__input--text .rv-map__input-field {
+  width: 6rem; padding: .1rem .35rem; border: 1px solid var(--rv-border); border-radius: .35rem;
+  background: var(--rv-surface); }
+.rv-map__input--slider .rv-map__input-field { width: 7rem; }
+.rv-map__input-value { min-width: 1.5rem; font-family: var(--nacara-font-mono, monospace); color: var(--rv-muted); }
+
+.rv-map__timeline { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; flex: 1 1 16rem; }
+.rv-map__speed { display: inline-flex; align-items: center; gap: .35rem; white-space: nowrap; }
+.rv-map__speed-select {
+  padding: .25rem .4rem; border: 1px solid var(--rv-border); border-radius: .4rem;
+  background: var(--rv-raised); color: var(--rv-text); font: inherit; cursor: pointer; }
+.rv-map__speed-select:focus-visible { outline: 2px solid var(--rv-contour); outline-offset: 2px; }
+.rv-map__track { position: relative; flex: 1 1 8rem; min-width: 6rem; display: grid; align-items: center; }
+.rv-map__ticks { position: absolute; inset: 0; pointer-events: none; }
+.rv-map__tick {
+  position: absolute; top: 50%; width: 2px; height: .625rem; margin: -.3125rem 0 0 -1px;
+  border-radius: 1px; background: color-mix(in oklab, var(--rv-contour) 55%, transparent); }
+.rv-map__scrub { width: 100%; margin: 0; accent-color: var(--rv-contour); background: transparent; }
+
+.rv-map__log {
+  margin: 0; padding: .5rem 1rem; list-style: none; max-height: 9.5rem; overflow-y: auto;
+  border-top: 1px solid var(--nacara-border);
+  font-family: var(--nacara-font-mono, monospace); font-size: .75rem; line-height: 1.6; color: var(--nacara-text-muted); }
+.rv-map__caption {
+  margin: 0; padding: .625rem 1rem; border-top: 1px solid var(--nacara-border);
+  background: var(--rv-surface); color: var(--rv-text); line-height: 1.6; }
+.rv-map__caption:empty { display: none; }
+.rv-map__log:empty { display: none; }
+.rv-map__log li:last-child { color: var(--rv-text); }
+.rv-map__log li.is-error { color: var(--rv-error); }
+.rv-map__why {
+  margin: 0; padding: .625rem 1rem; border-top: 1px solid var(--nacara-border);
+  background: var(--rv-surface); font-size: .75rem; white-space: pre-wrap; }
+.rv-map__why:empty { display: none; }
+.rv-map__error {
+  padding: .5rem 1rem; border-top: 1px solid var(--rv-error);
+  background: color-mix(in oklab, var(--rv-error) 12%, transparent); color: var(--rv-error); font-weight: 500; }
+.rv-map__error:empty { display: none; }
+
+@media (forced-colors: active) {
+  .rv-map-node__shape, .rv-map-edge { stroke: CanvasText; }
+  .rv-map-dot { fill: Highlight; }
+  .nacara-code__line.rv-map-line--run { outline: 1px solid Highlight; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .rv-map-node.is-flight .rv-map-node__flight,
+  .rv-map-node.is-dropped .rv-map-node__flight,
+  .rv-map-node.is-settled .rv-map-node__shape,
+  .rv-map-node.is-failing .rv-map-node__shape,
+  .rv-map-node__value.is-swap { animation: none; }
+  .rv-map-node__shape, .nacara-code__line.rv-map-line--run { transition: none; }
+}
+.rv-map-group {
+  fill: color-mix(in oklab, var(--rv-contour) 6%, transparent);
+  stroke: var(--rv-border-strong); stroke-width: 1; stroke-dasharray: 2 4; }
+.rv-map-group__column { fill: var(--rv-muted); font-size: 10px; }
+.rv-map-node--row .rv-map-node__name { font-size: 10.5px; }
+.rv-map-node--member .rv-map-node__name,
+.rv-map-node--member .rv-map-node__value { display: none; }
+
+/* Profile presentation: paper backgrounds and greyscale throughout, including animated states. */
+.signal-map-example {
+  --accent: #333;
+  --ink: #333;
+  --muted: #666;
+  --nacara-border: var(--rule);
+  --nacara-text-muted: var(--muted);
+  --nacara-font-mono: ui-monospace, Consolas, monospace;
+  --rv-canvas: var(--paper);
+  --rv-raised: var(--paper);
+  --rv-surface: #eeeee8;
+  --rv-contour: var(--muted);
+  --rv-violet: var(--ink);
+  --rv-pending: var(--muted);
+  --rv-accent-text: var(--ink);
+  --rv-border: var(--rule);
+  --rv-border-strong: #909690;
+  --rv-text: var(--ink);
+  --rv-muted: var(--muted);
+  --rv-value: var(--ink);
+  --rv-error: var(--ink);
+  margin: 28px 0;
+  border: 1px solid var(--rule);
+  min-width: 0;
+}
+.signal-map-example .rv-map__stage {
+  background: var(--paper);
+  overflow-x: auto;
+  padding-top: 24px;
+}
+.signal-map-example .rv-map__svg { min-width: 500px; }
+.signal-map-example .rv-map-edge { stroke-dasharray: 2 4; }
+.signal-map-example .rv-map-dot { fill: var(--muted); }
+.signal-map-example .rv-map-dot--bright { fill: var(--accent); filter: none; }
+.signal-map-example .rv-map-node__flight { stroke: var(--accent); }
+.signal-map-example .rv-map__tick { background: var(--muted); }
+.signal-map-example .rv-map__scrub {
+  appearance: none;
+  -webkit-appearance: none;
+  height: 20px;
+  cursor: pointer;
+  color: var(--accent);
+  accent-color: var(--accent);
+}
+.signal-map-example .rv-map__scrub::-webkit-slider-runnable-track {
+  height: 3px;
+  background: var(--rule);
+  border: 0;
+  border-radius: 0;
+}
+.signal-map-example .rv-map__scrub::-moz-range-track {
+  height: 3px;
+  background: var(--rule);
+  border: 0;
+  border-radius: 0;
+}
+.signal-map-example .rv-map__scrub::-webkit-slider-thumb {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 12px;
+  height: 12px;
+  margin-top: -4.5px;
+  border: 2px solid var(--paper);
+  border-radius: 50%;
+  background: var(--accent);
+}
+.signal-map-example .rv-map__scrub::-moz-range-thumb {
+  width: 8px;
+  height: 8px;
+  border: 2px solid var(--paper);
+  border-radius: 50%;
+  background: var(--accent);
+}
+.signal-map-example .rv-map__scrub:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+.signal-map-example .rv-map__speed-select { accent-color: var(--accent); }
+.signal-map-example .rv-map-node__shape { stroke: #666; }
+.signal-map-example .rv-map-node.is-running .rv-map-node__shape,
+.signal-map-example .rv-map-node.is-flash .rv-map-node__shape { stroke: var(--accent); filter: none; }
+.signal-map-example .rv-map-node.is-failed .rv-map-node__shape { stroke: var(--rv-error); stroke-dasharray: 2 3; }
+.signal-map-example .rv-map__button,
+.signal-map-example .rv-map__input,
+.signal-map-example .rv-map__speed-select { border-radius: 0; font-weight: 400; }
+.signal-map-example .rv-map__log { margin: 0; padding: 12px 16px; }
+.signal-map-example .rv-map__log li { margin: 0; }
+.signal-map-example .rv-map__button { min-height: 40px; }
+@media (max-width: 760px) {
+  .signal-map-example .rv-map__stage { padding-left: 12px; padding-right: 12px; }
+  .signal-map-example .rv-map__button { min-height: 44px; }
+}

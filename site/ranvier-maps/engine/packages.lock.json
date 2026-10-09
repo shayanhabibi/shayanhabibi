@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "dependencies": {
+    "net10.0": {
+      "Fable.Core": {
+        "type": "Direct",
+        "requested": "[5.3.0, )",
+        "resolved": "5.3.0",
+        "contentHash": "UAAdJeT3OEayd2x97U+fXxj6SCTByzTbjw8Rw5VKuYfcereVG4rYMAfoykIxm+Zr0g2FXwlcw1LR9c+AAXeyMQ==",
+        "dependencies": {
+          "FSharp.Core": "4.7.2"
+        }
+      },
+      "FSharp.Core": {
+        "type": "Direct",
+        "requested": "[11.0.101-rc1.26425.128, )",
+        "resolved": "11.0.101-rc1.26425.128",
+        "contentHash": "IXKJwuqgq5HwFWw1gM27SYl8Ztgb4tTPA7b3hn3ePv0cobG/iLBZ9c9a0VLzSPxT8QH7ZSxIdYCT5NtvTIcYww=="
+      }
+    }
+  }
+}

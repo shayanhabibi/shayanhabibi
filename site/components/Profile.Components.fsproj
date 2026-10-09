@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup><IsPackable>false</IsPackable></PropertyGroup>
+  <ItemGroup><ProjectReference Include="../ranvier-maps/Profile.RanvierMaps.fsproj" /></ItemGroup>
+  <ItemGroup>
+    <Compile Include="../Projects.fs" Link="Projects.fs" />
+    <Compile Include="HeroMotion.fs" />
+    <Compile Include="HeroTextMotion.fs" />
+    <Compile Include="ProjectMotion.fs" />
+    <Compile Include="ProjectRow.fs" />
+  </ItemGroup>
+  <ItemGroup><PackageReference Include="Partas.Solid" Version="3.0.0-local.e08ad85" /><PackageReference Include="Partas.AnimeJs" Version="0.1.0" /><PackageReference Include="Xantham.Fable.Core" Version="0.1.1" /><PackageReference Include="Xantham.Fable.Core.TS" Version="0.1.1" /></ItemGroup>
+</Project>

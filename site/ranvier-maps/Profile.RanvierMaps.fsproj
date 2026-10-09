@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <IsPackable>false</IsPackable>
+    <DefineConstants>$(DefineConstants);RANVIER_TRACE</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Helpers.fs" />
+    <Compile Include="Replay.fs" />
+    <Compile Include="MapModel.fs" />
+    <Compile Include="Layout.fs" />
+    <Compile Include="SignalMap.fs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="engine/Ranvier.fsproj" />
+    <PackageReference Include="Partas.Solid" Version="3.0.0-local.e08ad85" />
+    <PackageReference Include="Partas.AnimeJs" Version="0.1.0" />
+  </ItemGroup>
+</Project>
