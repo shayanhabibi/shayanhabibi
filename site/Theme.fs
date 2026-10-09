@@ -63,14 +63,14 @@ let private connectionDiagram () =
     DottedGraph.render options connections nodes labels
 
 let headerContent: HtmlElement list = [
-    a(class' = "identity", href = "/", ariaLabel = "Home") {
+    a(class' = "identity", href = "/shayanhabibi/", ariaLabel = "Home") {
         span(class' = "identity-mark", ariaHidden = true) { "sh." }
         span() { "Shayan Habibi" }
     }
     nav(ariaLabel = "Main navigation") {
-        a(href = "/#work") { "Selected work" }
-        a(href = "/#capabilities") { "Approach" }
-        a(class' = "nav-contact", href = "/#contact") { "Get in touch "; arrow "↗" }
+        a(href = "/shayanhabibi/#work") { "Selected work" }
+        a(href = "/shayanhabibi/#capabilities") { "Approach" }
+        a(class' = "nav-contact", href = "/shayanhabibi/#contact") { "Get in touch "; arrow "↗" }
     }
 ]
 
@@ -123,7 +123,7 @@ let private selectedWork content =
             for project in Projects.all do
                 staticProject false project
         }
-        a(class' = "all-work", href = "/all-projects/") { "All projects\u2003"; arrow "↗" }
+        a(class' = "all-work", href = "all-projects") { "All projects\u2003"; arrow "↗" }
     }
 
 let private capabilities () =
@@ -196,7 +196,7 @@ let layout (context: PageContext<DocFrontMatter>) =
         if isProjectIndex then [
             div(class' = "project-catalog") {
                 div(class' = "case-study catalog-heading") {
-                    a(class' = "case-back", href = "/#work") { "Back to selected work" }
+                    a(class' = "case-back", href = "../#work") { "Back to selected work" }
                     p(class' = "eyebrow") { "ENGINEERING PROJECTS" }
                     raw context.Content
                 }
@@ -216,10 +216,10 @@ let layout (context: PageContext<DocFrontMatter>) =
                         for heading in context.Page.Headings |> List.filter (fun heading -> heading.Level = 2) do
                             li() { a(href = "#" + heading.Anchor) { heading.Text } }
                     }
-                    a(class' = "case-all-projects", href = "/all-projects/") { "All projects "; arrow "↗" }
+                    a(class' = "case-all-projects", href = "../all-projects") { "All projects "; arrow "↗" }
                 }
                 article(class' = "case-study") {
-                    a(class' = "case-back", href = "/#work") { "Back to selected work" }
+                    a(class' = "case-back", href = "../#work") { "Back to selected work" }
                     p(class' = "eyebrow") { "ENGINEERING WALKTHROUGH" }
                     raw context.Content
                 }
