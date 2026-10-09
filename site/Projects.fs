@@ -123,10 +123,10 @@ module Projects =
         }
 
     let all = [|
-        partasSolid
         xantham
-        partasBuild
+        partasSolid
         ranvier
+        partasBuild
         loony
         wrflock
         fableElectron
