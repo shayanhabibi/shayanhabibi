@@ -137,11 +137,12 @@ module Projects =
     let graphUrl (project: Project) = baseUrl + "graphs/" + project.Id.ToString() + ".svg"
     let caseStudyUrl (project: Project) =
         match project.Id with
-        | PartasSolid -> Some "/partas-solid/"
-        | Xantham -> Some "/xantham/"
-        | PartasBuild -> Some "/partas-build/"
-        | Ranvier -> Some "/ranvier/"
+        | PartasSolid -> Some "partas-solid/"
+        | Xantham -> Some "xantham/"
+        | PartasBuild -> Some "partas-build/"
+        | Ranvier -> Some "ranvier/"
         | _ -> None
+        |> Option.map (fun url -> baseUrl + url)
     let filter category =
         if category = All then all
         else all |> Array.filter (fun project -> project.Category = category)
