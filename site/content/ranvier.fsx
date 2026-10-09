@@ -174,5 +174,5 @@ inspection tool with a defined boundary, not a replacement for engine tests.
 - [Tracing guide](https://shayanhabibi.github.io/Ranvier/guide/tracing/)
 - [Original signal maps](https://shayanhabibi.github.io/Ranvier/guide/signal-maps/)
 
-[Discuss an engineering role or consulting project](/#contact).
+[Discuss an engineering role or consulting project](../#contact).
 *)

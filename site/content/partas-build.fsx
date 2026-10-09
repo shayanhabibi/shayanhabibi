@@ -163,5 +163,5 @@ a separate step.
 - [Capability reference](https://shayanhabibi.github.io/Partas.Build/build/capabilities/)
 - [Project repository](https://github.com/shayanhabibi/Partas.Build)
 
-[Discuss a build or workspace-automation project](/#contact).
+[Discuss a build or workspace-automation project](../#contact).
 *)

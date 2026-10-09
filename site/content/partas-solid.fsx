@@ -100,5 +100,5 @@ provided by Partas.Solid.
 - [Component attribute and transformation scope](https://github.com/shayanhabibi/Partas.Solid/blob/master/docs/site/content/guide/solid-component-attribute.md)
 - [Project repository](https://github.com/shayanhabibi/Partas.Solid)
 
-[Discuss an engineering role or consulting project](/#contact).
+[Discuss an engineering role or consulting project](../#contact).
 *)

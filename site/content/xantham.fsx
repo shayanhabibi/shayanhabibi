@@ -103,5 +103,5 @@ That is one concrete consumer, not evidence that every npm library is supported.
 - [Compiler client documentation](https://shayanhabibi.github.io/Xantham/wire/)
 - [Project repository](https://github.com/shayanhabibi/Xantham)
 
-[Discuss an integration or developer-tooling project](/#contact).
+[Discuss an integration or developer-tooling project](../#contact).
 *)
