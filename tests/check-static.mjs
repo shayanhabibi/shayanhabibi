@@ -9,7 +9,7 @@ assert.match(html, /_partas\/solid\/[^"\s]+\.js/, 'Compiled Solid assets must be
 assert.ok(html.includes('mailto:shayan.habibi01@gmail.com'), 'The configured contact must be linked');
 await access(new URL('../site/output/.nojekyll', import.meta.url));
 for (const id of ['partas-solid', 'xantham', 'ranvier', 'partas-build', 'loony', 'wrflock', 'fable-electron']) {
-  assert.ok(html.includes(`/graphs/${id}.svg`), `Static project row is missing its ${id} illustration`);
+  assert.ok(html.includes(`/shayanhabibi/graphs/${id}.svg`), `Static project row is missing its ${id} illustration under the GitHub Pages base path`);
   const svg = await readFile(new URL(`../site/output/graphs/${id}.svg`, import.meta.url), 'utf8');
   assert.ok(svg.includes('xmlns="http://www.w3.org/2000/svg"'), `${id} is not a standalone SVG`);
 }

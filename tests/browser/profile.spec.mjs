@@ -68,7 +68,7 @@ test('each project illustration is served and decodes as an image', async ({ pag
   const images = page.locator('#project-explorer .project-illustration');
   await expect(images).toHaveCount(7);
   for (const id of ['partas-solid', 'xantham', 'ranvier', 'partas-build', 'loony', 'wrflock', 'fable-electron']) {
-    const response = await request.get(`/graphs/${id}.svg`);
+    const response = await request.get(`/shayanhabibi/graphs/${id}.svg`);
     expect(response.ok()).toBe(true);
     expect(response.headers()['content-type']).toContain('image/svg+xml');
   }

@@ -133,7 +133,8 @@ module Projects =
     |]
 
     let categories = [| All; Compilers; Interop; ReactiveSystems; Automation; Concurrency |]
-    let graphUrl (project: Project) = "/graphs/" + project.Id.ToString() + ".svg"
+    let baseUrl = "/shayanhabibi/"
+    let graphUrl (project: Project) = baseUrl + "graphs/" + project.Id.ToString() + ".svg"
     let caseStudyUrl (project: Project) =
         match project.Id with
         | PartasSolid -> Some "/partas-solid/"

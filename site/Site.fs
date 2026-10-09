@@ -19,7 +19,7 @@ let solid options =
 
 let site =
     Site.create "Shayan Habibi"
-    |> Site.baseUrl "/shayanhabibi/"
+    |> Site.baseUrl Projects.baseUrl
     |> Site.origin "https://shayanhabibi.github.io"
     |> Site.output "output"
     |> Site.staticFiles "static"
