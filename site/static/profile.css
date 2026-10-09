@@ -17,6 +17,7 @@
 .case-back { display: inline-block; margin-bottom: 32px; color: var(--accent); }
 .case-study h1 { font-size: clamp(32px, 4vw, 58px); line-height: 1.12; margin: 18px 0 32px; }
 .case-study h2 { font-family: var(--display); font-size: 30px; line-height: 1.25; margin: 48px 0 20px; }
+.walkthrough-layout .case-study .nacara-steps__title { font-family: var(--display); font-size: 22px; line-height: 1.25; margin: 0 0 10px; padding: 0; }
 .case-study p, .case-study ul, .case-study ol { margin: 18px 0; }
 .case-study li { margin: 12px 0; }
 .case-study a { text-decoration: underline; text-underline-offset: 3px; }
@@ -44,7 +45,7 @@
 .case-navigation li + li { margin-top: 12px; }
 .case-navigation a { display: block; }
 .case-all-projects { color: var(--accent); border-top: 1px solid var(--rule); padding-top: 16px; }
-.case-study h2 { scroll-margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--rule); }
+.case-study h2:not(.nacara-steps__title) { scroll-margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--rule); }
 .case-study figure { margin: 20px 0; min-width: 0; }
 .case-study .nacara-code figcaption { font-size: 12px; color: var(--muted); }
 .case-study .nacara-code__copy { display: none; }
